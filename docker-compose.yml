@@ -36,13 +36,19 @@ services:
       - "./volumes/proxy/certs:/etc/nginx/certs:rw"
     environment:
       - NGINX_DOCKER_GEN_CONTAINER=nginx-gen
-
+  db:
+    restart: always
+    image: postgres:9.6
+    container_name: db
+    environment:
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
   web:
     restart: always
     image: odoo:11
     container_name: odoo
-    depends_on:
-      - db
+    links:
+      - db:db
     ports:
       - "8069:8069"
     volumes:
@@ -50,20 +56,10 @@ services:
       - ./config:/etc/odoo
       - ./addons:/mnt/extra-addons
     environment:
-      - VIRTUAL_HOST=samplewebsite.example.com
+      - VIRTUAL_HOST=web04.talk.mg
       - VIRTUAL_NETWORK=nginx-proxy
       - VIRTUAL_PORT=8069
-      - LETSENCRYPT_HOST=samplewebsite.example.com
-      - LETSENCRYPT_EMAIL=test@example.com
-  db:
-    restart: always
-    image: postgres:9.6
-    environment:
-      - POSTGRES_PASSWORD=sample_password
-      - POSTGRES_USER=sample_user
-      - PGDATA=/var/lib/postgresql/data/pgdata
-    volumes:
-      - odoo-db-data:/var/lib/postgresql/data/pgdata
+      - LETSENCRYPT_HOST=web04.talk.mg
+      - LETSENCRYPT_EMAIL=toavina@nivo.mg
 volumes:
   odoo-web-data:
-  odoo-db-data:
