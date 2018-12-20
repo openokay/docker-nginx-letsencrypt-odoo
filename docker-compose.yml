@@ -46,24 +46,24 @@ services:
     ports:
       - "8069:8069"
     volumes:
-      - odoo-web-data:/var/lib/odoo
-      - ./config:/etc/odoo
-      - ./addons:/mnt/extra-addons
+      - odoo-web-data:/home/odoo10/web
+      - /home/odoo10/config:/etc/odoo
+      - /home/odoo10/addons:/mnt/extra-addons
     environment:
-      - VIRTUAL_HOST=www.agileerp.us
+      - VIRTUAL_HOST=www.chaoqichao.com
       - VIRTUAL_NETWORK=nginx-proxy
       - VIRTUAL_PORT=8069
-      - LETSENCRYPT_HOST=www.agileerp.us
-      - LETSENCRYPT_EMAIL=guy@verisage.us
+      - LETSENCRYPT_HOST=www.chaoqichao.com
+      - LETSENCRYPT_EMAIL=towering.cn@gmail.com
   db:
     restart: always
-    image: postgres:9.6
+    image: postgres:9.6.11
     environment:
-      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_PASSWORD=330680ptPT
       - POSTGRES_USER=odoo
-      - PGDATA=/var/lib/postgresql/data/pgdata
+      - PGDATA=/home/postgres/data
     volumes:
-      - odoo-db-data:/var/lib/postgresql/data/pgdata
+      - odoo-db-data:/home/postgres/data
 volumes:
   odoo-web-data:
   odoo-db-data:
