@@ -61,9 +61,10 @@ services:
     environment:
       - POSTGRES_PASSWORD=330680ptPT
       - POSTGRES_USER=odoo
-      - PGDATA=/home/postgres/data
+      - PGDATA=/home/postgresql/data/pgdata
     volumes:
-      - odoo-db-data:/home/postgres/data
+      - odoo-db-data:/home/postgresql/data/pgdata
 volumes:
   odoo-web-data:
   odoo-db-data:
+
