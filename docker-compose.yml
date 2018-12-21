@@ -43,6 +43,9 @@ services:
     environment:
       - POSTGRES_PASSWORD=odoo
       - POSTGRES_USER=odoo
+      - PGDATA=/home/postgresql/data/pgdata
+    volumes:
+      - odoo-db-data:/home/postgresql/data/pgdata
   web:
     restart: always
     image: odoo:10
@@ -63,3 +66,4 @@ services:
       - LETSENCRYPT_EMAIL=towering.cn@gmail.com
 volumes:
   odoo-web-data:
+  odoo-db-data:
