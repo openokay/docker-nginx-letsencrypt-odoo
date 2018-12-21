@@ -38,14 +38,14 @@ services:
       - NGINX_DOCKER_GEN_CONTAINER=nginx-gen
   db:
     restart: always
-    image: postgres:9.6
+    image: postgres:9.6.11
     container_name: db
     environment:
       - POSTGRES_PASSWORD=odoo
       - POSTGRES_USER=odoo
   web:
     restart: always
-    image: odoo:11
+    image: odoo:10
     container_name: odoo
     links:
       - db:db
